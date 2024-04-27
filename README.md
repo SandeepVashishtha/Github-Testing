@@ -15,13 +15,13 @@ This project demonstrates automated testing of GitHub functionalities using Sele
 
 1. Clone this repository to your local machine.
 ```bash
-   git clone https://github.com/SandeepVashishtha/Github-Testing.git
+git clone https://github.com/SandeepVashishtha/Github-Testing.git
 ```
 2.Download the Chrome WebDriver (chromedriver) and set its path in `config.properties` file. You can do this by opening the config.properties file in a text editor and adding a line like `chromedriver_path=/path/to/chromedriver`.
 3. Install required dependencies by running:
 
 ```
- mvn clean install
+mvn clean install
 ```
 
 ## Running Tests
