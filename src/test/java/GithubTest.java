@@ -19,7 +19,7 @@ public class GithubTest {
     private WebDriver driver;
     private Properties properties;
 
-    @BeforeMethod
+    @BeforeMethod   // This method will be executed before each test method
     public void setUp() {
         loadProperties();
         System.setProperty("webdriver.chrome.driver", properties.getProperty("chromedriver_path"));
@@ -28,10 +28,9 @@ public class GithubTest {
         driver.get("https://github.com/login");
     }
 
-    @AfterMethod
+    @AfterMethod   // This method will be executed after each test method
     public void tearDown() {
         driver.close();
-        // Do not quit the driver here, keep the browser session open
     }
 
     @Test(priority = 1)
@@ -105,14 +104,17 @@ public class GithubTest {
 
         WebElement bioField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[6]/main/div/div/div[1]/div/div/div[3]/div[1]/waiting-form/form/div[2]/text-expander/textarea")));
         bioField.clear();
-        bioField.sendKeys("Hello, I'm Sandeep");
+        bioField.sendKeys("Hello, I'm Automated Tester!");
 
         WebElement saveButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[6]/main/div/div/div[1]/div/div/div[3]/div[1]/waiting-form/form/div[9]/button[1]")));
         saveButton.click();
-
-        Assert.assertTrue(driver.getCurrentUrl().contains("https://github.com/TheSkylancer"), "Edit profile page not opened");
+        
+        // Asserting that the profile page is opened
+        // add your username in the below line else it will show test failed
+        Assert.assertTrue(driver.getCurrentUrl().contains("https://github.com/username"), "Edit profile page not opened");
     }
 
+    // this method is not working as expected, so commented it out
     /*
     @Test(priority = 6)
     public void createNewRepository() {
@@ -145,6 +147,8 @@ public class GithubTest {
     public void SearchandForkRepo() throws InterruptedException {
         login();
 
+        // Search for repositories owned by SandeepVashishtha 
+        // change it toh specific user you want to search for
         driver.get("https://github.com/search?q=owner%3ASandeepVashishtha&type=repositories");
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
@@ -163,6 +167,8 @@ public class GithubTest {
 
         Thread.sleep(3000);
 
+        // Asserting that the repository is forked successfully
+        // change the title to the repository you are forking
         Assert.assertTrue(driver.getTitle().equals("Fork SandeepVashishtha/Image-Recognition"), "Repository not forked successfully");
 
     }
